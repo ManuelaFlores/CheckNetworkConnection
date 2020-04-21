@@ -10,7 +10,7 @@ class NetworkChangeBroadcastReceiver constructor(
    private var networkUtil: NetworkUtil
 ) : BroadcastReceiver() {
 
-    //TODO: injectar esto
+    //TODO: add dependency injection
     //private lateinit var networkUtil: NetworkUtil
 
     override fun onReceive(context: Context?, intent: Intent?) {
