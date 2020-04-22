@@ -1,9 +1,11 @@
 package com.manuflowers.broadcastreceiverdemo
 
+import android.app.Application
+import android.content.Context
 import android.net.ConnectivityManager
 
 
-class NetworkUtil internal constructor(private val connectivityManager: ConnectivityManager) {
+class NetworkUtil(private val connectivityManager: ConnectivityManager) {
 
     val isConnected: Boolean
     get() {
@@ -13,4 +15,8 @@ class NetworkUtil internal constructor(private val connectivityManager: Connecti
 
     val type: Int
     get() = connectivityManager.activeNetworkInfo?.type ?: 1
+}
+
+fun provideConnectivityManager(application: Application): ConnectivityManager {
+    return application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 }

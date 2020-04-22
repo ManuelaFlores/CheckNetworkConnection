@@ -4,14 +4,12 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
+import org.koin.core.KoinComponent
 
 class NetworkChangeBroadcastReceiver constructor(
     val statusInternet: (Boolean) -> Unit,
    private var networkUtil: NetworkUtil
-) : BroadcastReceiver() {
-
-    //TODO: add dependency injection
-    //private lateinit var networkUtil: NetworkUtil
+) : BroadcastReceiver(), KoinComponent {
 
     override fun onReceive(context: Context?, intent: Intent?) {
 

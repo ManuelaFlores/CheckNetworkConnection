@@ -7,18 +7,22 @@ import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
+    private val networkUtil: NetworkUtil by inject()
+
     private val networkChangeBroadcastReceiver by lazy {
-        NetworkChangeBroadcastReceiver(networkUtil =NetworkUtil(provideConnectivityManager(this.application)), statusInternet =  {
-                statusInternet ->
-            if (statusInternet) {
-                Log.e("ACTIVE","estado activo")
-            } else {
-                Log.e("INNACTIVE","estado no activo")
-            }
-        } )
+        NetworkChangeBroadcastReceiver(
+            networkUtil = networkUtil,
+            statusInternet = { statusInternet ->
+                if (statusInternet) {
+                    Log.e("ACTIVE", "estado activo")
+                } else {
+                    Log.e("INNACTIVE", "estado no activo")
+                }
+            })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,15 +32,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        registerReceiver(networkChangeBroadcastReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+        registerReceiver(
+            networkChangeBroadcastReceiver,
+            IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        )
     }
 
     override fun onStop() {
         super.onStop()
         unregisterReceiver(networkChangeBroadcastReceiver)
-    }
-
-    private fun provideConnectivityManager(application: Application): ConnectivityManager {
-        return application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
 }
