@@ -1,6 +1,5 @@
 package com.manuflowers.broadcastreceiverdemo.di
 
-import android.net.ConnectivityManager
 import com.manuflowers.broadcastreceiverdemo.NetworkUtil
 import com.manuflowers.broadcastreceiverdemo.provideConnectivityManager
 import org.koin.dsl.module

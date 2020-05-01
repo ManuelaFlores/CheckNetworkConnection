@@ -9,7 +9,7 @@ import org.koin.core.KoinComponent
 class NetworkChangeBroadcastReceiver constructor(
     val statusInternet: (Boolean) -> Unit,
    private var networkUtil: NetworkUtil
-) : BroadcastReceiver(), KoinComponent {
+) : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
 

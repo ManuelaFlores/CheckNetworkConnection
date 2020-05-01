@@ -7,6 +7,8 @@ import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import kotlinx.android.synthetic.main.layout_no_internet_connection.*
 import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
@@ -18,9 +20,9 @@ class MainActivity : AppCompatActivity() {
             networkUtil = networkUtil,
             statusInternet = { statusInternet ->
                 if (statusInternet) {
-                    Log.e("ACTIVE", "estado activo")
+                    noInternetConnectionConstraintLayout.visibility = View.GONE
                 } else {
-                    Log.e("INNACTIVE", "estado no activo")
+                    noInternetConnectionConstraintLayout.visibility = View.VISIBLE
                 }
             })
     }
